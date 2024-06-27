@@ -1,5 +1,5 @@
 {
-  "name": "passwprd-reset-backend",
+  "name": "password-reset-backend",
   "version": "1.0.0",
   "description": "User management backend API",
   "main": "index.js",
