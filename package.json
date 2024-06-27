@@ -1,0 +1,19 @@
+{
+  "name": "passwprd-reset-backend",
+  "version": "1.0.0",
+  "description": "User management backend API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/automationblog/password-reset-backend.git"
+  },
+  "author": "Alwin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/automationblog/password-reset-backend/issues"
+  },
+  "homepage": "https://github.com/automationblog/password-reset-backend#readme"
+}
