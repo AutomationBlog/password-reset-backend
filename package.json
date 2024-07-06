@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "User management backend API",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node index.js",
     "start": "node index.js"
