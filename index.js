@@ -2,8 +2,6 @@ import express from "express";
 import cors from "cors";
 import Dotenv from "dotenv";
 
-import connectToDb from "./dbUtils/mongodb-connection.js";
-import usersRouter from "./routes/users_db.js";
 import authRoutes from "./routes/auth.route.js";
 import { connectDB } from "./dbUtils/connectDB.js";
 const app = express();
