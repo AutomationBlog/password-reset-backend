@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt";
 import { generateVerificationToken } from "../utils/generateVerificationToken.js";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
+import { sendVerificationEmail } from "../nodemailer/emails.js";
 export const signup = async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -13,30 +14,31 @@ export const signup = async (req, res) => {
     if (userAlreadyExists) {
       return res
         .status(400)
-        .send({ success: false, msg: "User already exists" });
+        .json({ success: false, msg: "User already exists" });
+    } else {
+      const hashPassword = await bcrypt.hash(password, 10);
+      const verificationToken = generateVerificationToken();
+      const newUser = new User({
+        name,
+        email,
+        password: hashPassword,
+        verificationToken,
+        verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
+      });
+      await newUser.save();
+      await generateTokenAndSetCookie(res, newUser._id);
+      await sendVerificationEmail(newUser.email, verificationToken);
+      res.status(201).json({
+        success: true,
+        msg: "User created successfully",
+        user: {
+          ...newUser._doc,
+          password: undefined,
+        },
+      });
     }
-
-    const hashPassword = await bcrypt.hash(password, 10);
-    const verificationToken = generateVerificationToken();
-    const newUser = new User({
-      name,
-      email,
-      password: hashPassword,
-      verificationToken,
-      verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000,
-    });
-    await newUser.save();
-    generateTokenAndSetCookie(res, newUser._id);
-    res.status(201).send({
-      success: true,
-      msg: "User created successfully",
-      user: {
-        ...newUser._doc,
-        password: undefined,
-      },
-    });
   } catch (error) {
-    res.status(400).send({ msg: error.message });
+    res.status(400).json({ msg: error.message });
   }
 };
 
