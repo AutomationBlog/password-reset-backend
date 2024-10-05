@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
 import Dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import authRoutes from "./routes/auth.route.js";
 import { connectDB } from "./dbUtils/connectDB.js";
 const app = express();
 app.use(cors());
 Dotenv.config();
-app.use(express.json());
+app.use(express.json()); // allows us to parse incoming requests:req.body
+app.use(cookieParser()); // allows us to parse incoming requests:req.cookies
 
 app.get("/", (req, res) => {
   res.send("User Management Backend API");
