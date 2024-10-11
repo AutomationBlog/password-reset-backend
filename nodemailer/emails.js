@@ -56,7 +56,7 @@ export const sendPasswordResetSuccessfulEmail = async (email) => {
 };
 
 export const sendPasswordResetEmail = async (email, resetToken) => {
-  const resetURL = "";
+  let resetURL = "";
   if (process.env.isLOCAL === "true") {
     resetURL = `${process.env.CLIENT_URL_LOCAL}/reset-password/${resetToken}`;
   } else {
