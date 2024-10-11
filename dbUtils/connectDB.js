@@ -11,7 +11,7 @@ export const connectDB = async () => {
       );
     } else {
       conn = await mongoose.connect(
-        `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.m2gkomc.mongodb.net/${process.env.dbName}?retryWrites=true&w=majority&appName=Cluster0`
+        `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.m2gkomc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`
       );
     }
     console.log(`MongoDB Connected: ${conn.connection.host}`);
