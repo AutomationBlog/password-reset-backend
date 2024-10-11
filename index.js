@@ -6,7 +6,11 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.route.js";
 import { connectDB } from "./dbUtils/connectDB.js";
 const app = express();
-app.use(cors());
+const corsConfig = {
+  credentials: true,
+  origin: true,
+};
+app.use(cors(corsConfig));
 Dotenv.config();
 app.use(express.json()); // allows us to parse incoming requests:req.body
 app.use(cookieParser()); // allows us to parse incoming requests:req.cookies
