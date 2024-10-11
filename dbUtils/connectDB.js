@@ -4,7 +4,7 @@ dotenv.config();
 
 export const connectDB = async () => {
   try {
-    const conn = "";
+    let conn = "";
     if (process.env.isLOCAL === "true") {
       conn = await mongoose.connect(
         `mongodb://${process.env.DB_URL}/${process.env.DB_NAME}`
