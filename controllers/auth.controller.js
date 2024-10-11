@@ -151,11 +151,11 @@ export const forgotPassword = async (req, res) => {
 };
 
 export const resetPassword = async (req, res) => {
-  const { resetToken } = req.params;
+  const { token } = req.params;
   const { password } = req.body;
   try {
     const user = await User.findOne({
-      resetPasswordToken: resetToken,
+      resetPasswordToken: token,
       resetPasswordExpiresAt: { $gt: Date.now() },
     });
     if (!user) {

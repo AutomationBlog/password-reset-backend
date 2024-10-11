@@ -1,3 +1,4 @@
+import e from "express";
 import {
   VERIFICATION_EMAIL_TEMPLATE,
   VERIFICATION_EMAIL_SUCCESS_TEMPLATE,
@@ -55,7 +56,12 @@ export const sendPasswordResetSuccessfulEmail = async (email) => {
 };
 
 export const sendPasswordResetEmail = async (email, resetToken) => {
-  const resetURL = `${process.env.CLIENT_URL_LOCAL}/reset-password/${resetToken}`;
+  const resetURL = "";
+  if (process.env.isLOCAL === "true") {
+    resetURL = `${process.env.CLIENT_URL_LOCAL}/reset-password/${resetToken}`;
+  } else {
+    resetURL = `${process.env.CLIENT_URL_CLOUD}/reset-password/${resetToken}`;
+  }
   const emailOptions = {
     from: process.env.EMAIL,
     to: email,

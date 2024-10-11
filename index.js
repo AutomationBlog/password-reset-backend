@@ -24,8 +24,8 @@ app.use("/api/auth", authRoutes);
 // app.use("/users", usersRouter); // Users Router
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  connectDB();
+app.listen(PORT, async () => {
+  await connectDB();
   console.log(`Server running on port ${PORT}`);
   console.log(`http://localhost:${PORT}`);
 });
