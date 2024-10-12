@@ -16,7 +16,7 @@ app.use(express.json()); // allows us to parse incoming requests:req.body
 app.use(cookieParser()); // allows us to parse incoming requests:req.cookies
 
 app.get("/", (req, res) => {
-  res.send("User Management Backend API");
+  res.send("User Authentication Backend API");
 });
 
 app.use("/api/auth", authRoutes);
