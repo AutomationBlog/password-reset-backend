@@ -1,6 +1,6 @@
 # Password Reset Backend API
 
-User management API
+User Authentication and Password Reset Email Notification.
 
 ## End Point
 
