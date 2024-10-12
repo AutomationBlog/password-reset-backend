@@ -8,7 +8,7 @@ import { connectDB } from "./dbUtils/connectDB.js";
 const app = express();
 const corsConfig = {
   credentials: true,
-  origin: true,
+  origin: process.env.CLIENT_URL_CLOUD,
 };
 app.use(cors(corsConfig));
 Dotenv.config();
