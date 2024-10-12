@@ -32,11 +32,12 @@ export const signup = async (req, res) => {
         verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
       });
       await newUser.save();
-      await generateTokenAndSetCookie(res, newUser._id);
+      const token = await generateTokenAndSetCookie(res, newUser._id);
       await sendVerificationEmail(newUser.email, verificationToken);
       res.status(201).json({
         success: true,
         msg: "User created successfully",
+        token: token,
         user: {
           ...newUser._doc,
           password: undefined,
@@ -99,12 +100,13 @@ export const login = async (req, res) => {
           .status(400)
           .json({ success: false, msg: "Invalid password" });
       } else {
-        await generateTokenAndSetCookie(res, user._id);
+        const token = await generateTokenAndSetCookie(res, user._id);
         user.lastLogin = new Date();
         await user.save();
         res.status(200).json({
           success: true,
           msg: "Logged in successfully",
+          token: token,
           user: {
             ...user._doc,
             password: undefined,
